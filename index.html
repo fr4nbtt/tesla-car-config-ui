@@ -4,9 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/style.css" />
-    <title>Simple Tailwind Starter</title>
+    <title>Tesla car configurator</title>
   </head>
   <body>
-    <h1 class="text-3xl bg-emerald-200">Simple Tailwind Starter</h1>
+    <!-- Top Bar -->
+    <div id="top-bar" class="bg-gray-100 fixed top-0 right-0 left-0 py-2">
+      <p class="text-center py-2 font-semibold">
+        0% APR avalaible for qualified buyers
+      </p>
+    </div>
+
+    <!-- Header -->
+    <header class="flex justify-between items-center px-10 py-6 mt-16">
+      <img src="images/logo.svg" alt="tesla" class="w-[120px] h-[24px]" />
+      <button class="flex items-center gap-1">
+        <img src="icons/earth.svg" alt="" class="h-7 w-7 inline" />
+        <span class="font-bold">US</span>
+      </button>
+    </header>
   </body>
 </html>
+
+<!-- Add top bar, header, and main layout -->
