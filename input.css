@@ -6,3 +6,14 @@
   @apply border-2 border-gray-300 rounded-full p-2 transition-transform duration-300 transform hover:scale-100 !important;
 }
 
+#top-bar {
+  transition: transform 0.5s ease-in-out;
+}
+
+.visible-bar {
+  transform: translateY(0); 
+}
+
+.hidden-bar {
+  transform: translateY(-100%); 
+}
