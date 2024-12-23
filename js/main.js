@@ -24,8 +24,8 @@ const exteriorImages = {
 };
 
 const interiorImages = {
-  Dark: "images/mode-y-interior-dark.jpg",
-  Light: "images/mode-y-interior-light.jpg",
+  Dark: "images/model-y-interior-dark.jpg",
+  Light: "images/model-y-interior-light.jpg",
 };
 
 /* Handle Color Selection */
@@ -42,6 +42,18 @@ const handleColorButtonClick = (e) => {
     const buttons = e.currentTarget.querySelectorAll("button");
     buttons.forEach((btn) => btn.classList.remove("btn-selected"));
     button.classList.add("btn-selected");
+
+    /* Change exterior image */
+    if (e.currentTarget === exteriorColorSection) {
+      const color = button.querySelector("img").alt;
+      exteriorImage.src = exteriorImages[color];
+    }
+
+    /* Change interior image */
+    if (e.currentTarget === interiorColorSection) {
+      const color = button.querySelector("img").alt;
+      interiorImage.src = interiorImages[color];
+    }
   }
 };
 
