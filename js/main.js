@@ -7,6 +7,13 @@ const exteriorImage = document.querySelector("#exterior-image");
 const interiorImage = document.querySelector("#interior-image");
 const wheelButtonsSection = document.querySelector("#wheel-buttons");
 
+let selectedColor = "Stealth Grey";
+const selectedOptions = {
+  "Performance Wheels": false,
+  "Performance Package": false,
+  "Full Self-Driving": false,
+};
+
 /* Handle Top Bar On Scroll */
 const handleScroll = () => {
   const atTop = window.scrollY === 0;
@@ -46,8 +53,8 @@ const handleColorButtonClick = (e) => {
 
     /* Change exterior image */
     if (e.currentTarget === exteriorColorSection) {
-      const color = button.querySelector("img").alt;
-      exteriorImage.src = exteriorImages[color];
+      selectedColor = button.querySelector("img").alt;
+      updateExteriorImage();
     }
 
     /* Change interior image */
@@ -56,6 +63,19 @@ const handleColorButtonClick = (e) => {
       interiorImage.src = interiorImages[color];
     }
   }
+};
+
+// Update exterior image based on color and wheels
+const updateExteriorImage = () => {
+  const performanceSuffix = selectedOptions["Performance Wheels"]
+    ? "-performance"
+    : "";
+  const colorKey =
+    selectedColor in exteriorImages ? selectedColor : "Stealth Grey";
+  exteriorImage.src = exteriorImages[colorKey].replace(
+    ".jpg",
+    `${performanceSuffix}.jpg`
+  );
 };
 
 /* Wheel Selection */
@@ -67,11 +87,10 @@ const handleWheelButtonClick = (e) => {
     // Add selected styles  to clicked button
     e.target.classList.add("bg-gray-700", "text-white");
 
-    const selectedWheel = e.target.textContent.includes("Performance");
+    selectedOptions["Performance Wheels"] =
+      e.target.textContent.includes("Performance");
 
-    exteriorImage.src = selectedWheel
-      ? "images/model-y-stealth-grey-performance.jpg"
-      : "images/model-y-stealth-grey.jpg";
+    updateExteriorImage();
   }
 };
 
