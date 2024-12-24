@@ -5,6 +5,7 @@ const exteriorColorSection = document.querySelector("#exterior-buttons");
 const interiorColorSection = document.querySelector("#interior-buttons");
 const exteriorImage = document.querySelector("#exterior-image");
 const interiorImage = document.querySelector("#interior-image");
+const wheelButtonsSection = document.querySelector("#wheel-buttons");
 
 /* Handle Top Bar On Scroll */
 const handleScroll = () => {
@@ -57,7 +58,25 @@ const handleColorButtonClick = (e) => {
   }
 };
 
+/* Wheel Selection */
+const handleWheelButtonClick = (e) => {
+  if (e.target.tagName === "BUTTON") {
+    const buttons = document.querySelectorAll("#wheel-buttons button");
+    buttons.forEach((btn) => btn.classList.remove("bg-gray-700", "text-white"));
+
+    // Add selected styles  to clicked button
+    e.target.classList.add("bg-gray-700", "text-white");
+
+    const selectedWheel = e.target.textContent.includes("Performance");
+
+    exteriorImage.src = selectedWheel
+      ? "images/model-y-stealth-grey-performance.jpg"
+      : "images/model-y-stealth-grey.jpg";
+  }
+};
+
 /* Event listeners */
 window.addEventListener("scroll", () => requestAnimationFrame(handleScroll));
 exteriorColorSection.addEventListener("click", handleColorButtonClick);
 interiorColorSection.addEventListener("click", handleColorButtonClick);
+wheelButtonsSection.addEventListener("click", handleWheelButtonClick);
