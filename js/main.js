@@ -6,6 +6,7 @@ const interiorColorSection = document.querySelector("#interior-buttons");
 const exteriorImage = document.querySelector("#exterior-image");
 const interiorImage = document.querySelector("#interior-image");
 const wheelButtonsSection = document.querySelector("#wheel-buttons");
+const performanceBtn = document.querySelector("#performance-btn");
 
 let selectedColor = "Stealth Grey";
 const selectedOptions = {
@@ -14,14 +15,14 @@ const selectedOptions = {
   "Full Self-Driving": false,
 };
 
-/* Handle Top Bar On Scroll */
+// Handle Top Bar On Scroll
 const handleScroll = () => {
   const atTop = window.scrollY === 0;
   topBar.classList.toggle("visible-bar", atTop);
   topBar.classList.toggle("hidden-bar", !atTop);
 };
 
-/* Image Mapping */
+// Image Mapping
 const exteriorImages = {
   "Stealth Grey": "images/model-y-stealth-grey.jpg",
   "Pearl White": "images/model-y-pearl-white.jpg",
@@ -36,7 +37,7 @@ const interiorImages = {
   Light: "images/model-y-interior-light.jpg",
 };
 
-/* Handle Color Selection */
+// Handle Color Selection
 const handleColorButtonClick = (e) => {
   let button;
 
@@ -51,13 +52,13 @@ const handleColorButtonClick = (e) => {
     buttons.forEach((btn) => btn.classList.remove("btn-selected"));
     button.classList.add("btn-selected");
 
-    /* Change exterior image */
+    // Change exterior image
     if (e.currentTarget === exteriorColorSection) {
       selectedColor = button.querySelector("img").alt;
       updateExteriorImage();
     }
 
-    /* Change interior image */
+    // Change interior image
     if (e.currentTarget === interiorColorSection) {
       const color = button.querySelector("img").alt;
       interiorImage.src = interiorImages[color];
@@ -78,7 +79,7 @@ const updateExteriorImage = () => {
   );
 };
 
-/* Wheel Selection */
+// Wheel Selection
 const handleWheelButtonClick = (e) => {
   if (e.target.tagName === "BUTTON") {
     const buttons = document.querySelectorAll("#wheel-buttons button");
@@ -94,8 +95,15 @@ const handleWheelButtonClick = (e) => {
   }
 };
 
-/* Event listeners */
+// Performance Package Selection
+const handlePerformanceButtonClick = () => {
+  performanceBtn.classList.toggle("bg-gray-700");
+  performanceBtn.classList.toggle("text-white");
+};
+
+// Event listeners
 window.addEventListener("scroll", () => requestAnimationFrame(handleScroll));
 exteriorColorSection.addEventListener("click", handleColorButtonClick);
 interiorColorSection.addEventListener("click", handleColorButtonClick);
 wheelButtonsSection.addEventListener("click", handleWheelButtonClick);
+performanceBtn.addEventListener("click", handlePerformanceButtonClick);
