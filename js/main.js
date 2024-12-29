@@ -152,8 +152,7 @@ const handlePerformanceButtonClick = () => {
 
 // Full Self Driving Selection
 const fullSelfDrivingChange = () => {
-  const isSelected = fullSelfDrivingCheckbox.checked;
-  selectedOptions["Full Self-Driving"] = isSelected;
+  selectedOptions["Full Self-Driving"] = fullSelfDrivingCheckbox.checked;
   updateTotalPrice();
 };
 
