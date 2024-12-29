@@ -11,6 +11,9 @@ const totalPriceElement = document.querySelector("#total-price");
 const fullSelfDrivingCheckbox = document.querySelector(
   "#full-self-driving-checkbox"
 );
+const accessoryCheckBoxes = document.querySelectorAll(
+  ".accessory-form-checkbox"
+);
 
 const basePrice = 52490;
 let currentPrice = basePrice;
@@ -52,6 +55,22 @@ const updateTotalPrice = () => {
   if (selectedOptions["Full Self-Driving"]) {
     currentPrice += pricing["Full Self-Driving"];
   }
+
+  // Accessory Checkboxes
+  accessoryCheckBoxes.forEach((checkbox) => {
+    // Extract the accessory label
+    const accessoryLabel = checkbox
+      .closest("label")
+      .querySelector("span")
+      .textContent.trim();
+
+    const accessoryPrice = pricing["Accessories"][accessoryLabel];
+
+    // Add to current price if accessory is selected
+    if (checkbox.checked) {
+      currentPrice += accessoryPrice;
+    }
+  });
 
   // Update the total price in UI
   totalPriceElement.textContent = `$${currentPrice.toLocaleString("en-US")}`;
@@ -155,6 +174,11 @@ const fullSelfDrivingChange = () => {
   selectedOptions["Full Self-Driving"] = fullSelfDrivingCheckbox.checked;
   updateTotalPrice();
 };
+
+// Handle Accessory Checkbox Listeners
+accessoryCheckBoxes.forEach((checkbox) => {
+  checkbox.addEventListener("change", updateTotalPrice);
+});
 
 // Event listeners
 window.addEventListener("scroll", () => requestAnimationFrame(handleScroll));
